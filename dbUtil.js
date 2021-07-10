@@ -39,8 +39,10 @@ const addToDb = (obj, cb) => {
         console.log('from dbUtils : ' + result);
         if (err) {
             cb(err, result);  //result as empty
+            mongoose.connection.close(); 
         } else {
             cb(err, result); //err as null
+            mongoose.connection.close(); 
         }
     })
 
@@ -50,8 +52,10 @@ const findInDb = (queryObj, cb) => {
     UserModel.find(queryObj, (err, data) => {
         if (err) {
             cb(err, data); //data as null
+            mongoose.connection.close(); 
         } else {
             cb(err, data); //err as null
+            mongoose.connection.close(); 
         }
     })
 }

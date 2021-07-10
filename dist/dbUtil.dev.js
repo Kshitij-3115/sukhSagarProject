@@ -45,8 +45,12 @@ var addToDb = function addToDb(obj, cb) {
 
     if (err) {
       cb(err, result); //result as empty
+
+      mongoose.connection.close();
     } else {
       cb(err, result); //err as null
+
+      mongoose.connection.close();
     }
   });
 };
@@ -55,8 +59,12 @@ var findInDb = function findInDb(queryObj, cb) {
   UserModel.find(queryObj, function (err, data) {
     if (err) {
       cb(err, data); //data as null
+
+      mongoose.connection.close();
     } else {
       cb(err, data); //err as null
+
+      mongoose.connection.close();
     }
   });
 };
