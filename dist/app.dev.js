@@ -6,7 +6,7 @@ var router = require('./routers.js'); //init app
 
 
 var app = express();
-var port = 8000; //set up views --> 
+var port = process.env.PORT || 3000; //set up views --> 
 
 app.set('view engine', 'pug'); //serve static assets --> 
 
@@ -21,5 +21,5 @@ app.use('/form', router);
 app.use('/user', router); //start server -> 
 
 app.listen(port, function () {
-  console.log("server is up on port number 8000"); //server started! 
+  console.log("server is up on port number ".concat(port)); //server started! 
 });
