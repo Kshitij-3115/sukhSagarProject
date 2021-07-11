@@ -59,22 +59,16 @@ var upload = multer(options).single('resumeFile'); //upload.single('resumeFile')
 
 router.post('/sendOTP', function (req, res) {
   console.log(req.body);
-  var otp = Math.floor(100000 + Math.random() * 900000); // res.send({isSent : true, otp : otp}); 
-
-  var mobile = req.body.mobile; //mobile number
-
-  var options = {
-    authorization: "xEcd3Gr48XWZj17PbSVmoA5psOyNRqLa06wF9fzUBhQkJItCn2rb4OAE5R93LDUSKXBHQlndptg7Ie0m",
-    message: otp,
-    numbers: [mobile]
-  };
-  fastTwoSms.sendMessage(options).then(function (response) {
-    console.log(response);
-    res.send({
-      isSent: true,
-      otp: otp
-    });
-  });
+  var otp = Math.floor(100000 + Math.random() * 900000);
+  res.send({
+    isSent: true,
+    otp: otp
+  }); // const mobile = req.body.mobile; //mobile number
+  // const options = { authorization: "xEcd3Gr48XWZj17PbSVmoA5psOyNRqLa06wF9fzUBhQkJItCn2rb4OAE5R93LDUSKXBHQlndptg7Ie0m", message: otp, numbers: [mobile] };
+  // fastTwoSms.sendMessage(options).then((response) => {
+  //     console.log(response);
+  //     res.send({ isSent: true, otp: otp });
+  // });
 });
 router.post('/submit', function (req, res) {
   //req.file - file uploaded 
@@ -98,7 +92,8 @@ router.post('/submit', function (req, res) {
 
       if (!req.file) {
         res.status(500);
-        return res.json('file not found!');
+        res.json('file not found!');
+        return res.end();
       }
 
       statusObj = {

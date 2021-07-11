@@ -18,7 +18,7 @@ $(document).ready(()=>{
                 if(status==="success"){
                     if(data.isSent){
                         otp = data.otp; 
-                        alert("OTP sent successfully to " + mobile);
+                        alert("OTP sent successfully to " + mobile + " " + otp);
                     } else {
                         alert("an error occured, please try again."); 
                     }
@@ -47,39 +47,46 @@ $(document).ready(()=>{
 
     $('#pin').blur( () => {
         let pincode = $('#pin').val();
-        let uri = `https://api.postalpincode.in/pincode/${pincode}` 
-        let place = $('#place'); 
-        let state = $('#state'); 
-        let country = $('#country');
-        $("#spinnerPin").css("display","block");  //spinner start
-        $.get(uri,(data,status)=>{
-            $("#spinnerPin").css("display","none"); //spinner vanish
-            let resultArray = data[0].PostOffice; 
-            place.empty();
-            state.empty(); 
-            country.empty(); 
-            place.append(`<option value="" > --city/villege/area-- </option>`); 
-            state.append(`<option value=""> --select state-- </option>`); 
-            country.append(`<option value=""> --select country-- </option>`); 
-            let x = true; 
-            resultArray.forEach(element => {
-               let placeD = element.Name; 
-               let stateD = element.State; 
-               let countryD = element.Country; 
-               let html1 = `<option value="${placeD}"> ${placeD} </option>`;
-               let html2 = `<option value="${stateD}"> ${stateD} </option>`; 
-               let html3 = `<option value="${countryD}"> ${countryD} </option>`;
-               place.append(html1); 
-               if(x){
-                state.append(html2); 
-                country.append(html3); 
-                x = false; 
-               }
-               
-
-            });
-             
-        })
+        let pattern = /^[1-9][0-9]{5}$/; 
+        if(pattern.test(pincode)) {
+            let uri = `https://api.postalpincode.in/pincode/${pincode}` 
+            let place = $('#place'); 
+            let state = $('#state'); 
+            let country = $('#country');
+            $("#spinnerPin").css("display","block");  //spinner start
+            $.get(uri,(data,status)=>{
+                $("#spinnerPin").css("display","none"); //spinner vanish
+                let resultArray = data[0].PostOffice; 
+                place.empty();
+                state.empty(); 
+                country.empty(); 
+                place.append(`<option value="" > --city/villege/area-- </option>`); 
+                state.append(`<option value=""> --select state-- </option>`); 
+                country.append(`<option value=""> --select country-- </option>`); 
+                let x = true; 
+                resultArray.forEach(element => {
+                   let placeD = element.Name; 
+                   let stateD = element.State; 
+                   let countryD = element.Country; 
+                   let html1 = `<option value="${placeD}"> ${placeD} </option>`;
+                   let html2 = `<option value="${stateD}"> ${stateD} </option>`; 
+                   let html3 = `<option value="${countryD}"> ${countryD} </option>`;
+                   place.append(html1); 
+                   if(x){
+                    state.append(html2); 
+                    country.append(html3); 
+                    x = false; 
+                   }
+                   
+    
+                });
+                 
+            }) 
+        } else {
+            alert('please enter a valid pincode!'); 
+        }
+       
+        
     })
 
     //now handle form submission here
