@@ -4,7 +4,7 @@
   "description": "internship assignment ( sign up and login page )",
   "main": "app.js",
   "scripts": {
-   "start" : "node app.js"
+    "start": "node app.js"
   },
   "author": "Kshitij Khot",
   "license": "ISC",

@@ -5,10 +5,11 @@ html
         link(rel="stylesheet" href="/css/style.css")
         link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css")
         link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")         
-    body(class="homeBackground")
-        include includes/navbar.pug
-        div(class="col-12 " ) 
-            div(class="col-7 container" style="margin : auto auto")
+    body(class="")
+        
+        div(class="col-md-12  col-sm-12 homeBackground" ) 
+            include includes/navbar.pug
+            div(class="col-md-7 col-sm-12 container-fluid" style="margin-top :100px;")
                 include includes/login.pug
         
         

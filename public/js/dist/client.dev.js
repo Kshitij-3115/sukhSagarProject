@@ -21,7 +21,7 @@ $(document).ready(function () {
         if (status === "success") {
           if (data.isSent) {
             otp = data.otp;
-            alert("OTP sent successfully to " + mobile + " " + otp);
+            alert("OTP sent successfully to " + mobile);
           } else {
             alert("an error occured, please try again.");
           }
