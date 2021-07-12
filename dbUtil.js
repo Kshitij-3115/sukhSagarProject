@@ -42,11 +42,15 @@ const userSchema = new Schema({
 const UserModel = new mongoose.model('UserModel', userSchema); //model
 
 const addToDb = (obj, cb) => {
+    console.log('reached on 45');
     openConnection((err,msg) => {
+        console.log('reached on 47');
         if(err) {
+            console.log('reached on 49');
             console.log(err + " " + msg); 
             return cb(err,[]); //an error and an empty result array!
         } else {
+            console.log('reached in 53');
             let user = new UserModel(obj);
             user.save((err, result) => {
                 console.log('from dbUtils : ' + err);

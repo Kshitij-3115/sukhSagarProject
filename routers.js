@@ -68,6 +68,7 @@ router.post('/submit', (req, res) => {
 
     upload(req, res, (err) => {
         rb = req.body;
+       
         if (err) {
             //multer error
             if (err.code == 'LIMIT_FILE_SIZE') {
@@ -108,16 +109,22 @@ router.post('/submit', (req, res) => {
             }
         }
         dbUtils.addToDb(obj, (err, result) => {
+            console.log('reached on 112');
             if (err) {
+                console.log('reached on 114');
                 res.render('err',{message : 'a database error occured!'}); 
             } else {
+                console.log('reached on 117'); 
                 if(result.length === 0) {
                     //item array is empty => not uploaded to db 
+                    console.log('reached on 120'); 
                     res.status(500); 
                    return  res.render('err',{message:'a database error occured! please try after some time.'}); 
                 }
                 //uploaded to db ===> user registration successfull
+                console.log('reached on 125');
                 res.status(200);
+                console.log('reached on 127');
                 res.render('msg.pug');
             }
         })
