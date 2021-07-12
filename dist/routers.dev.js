@@ -90,8 +90,16 @@ router.post('/submit', function (req, res) {
       if (err.code == 'LIMIT_FILE_SIZE') {
         err.message = "file is larger than allowed size.";
         err.success = false;
+        res.render('err.pug', {
+          message: 'file is larger than allowed size!'
+        });
+        res.end();
       }
 
+      res.render('err.pug', {
+        message: err
+      });
+      res.end();
       statusObj = err;
     } else {
       console.log(req.file);
