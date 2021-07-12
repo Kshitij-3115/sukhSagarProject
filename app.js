@@ -4,7 +4,7 @@ const http = require('http');
 
 //init app
 const app = express();
-const httpServer = http.createServer(app); 
+// const httpServer = http.createServer(app); 
 const port = process.env.PORT || 3000; 
 
 //set up views --> 
@@ -26,6 +26,11 @@ app.use('/form',router);
 
 app.use('/user',router);
 //start server -> 
-httpServer.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`server is up on port number ${port}`); //server started! 
 })
+
+server.on('clientError',(err,socket) => {
+    console.log(err);
+})
+

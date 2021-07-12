@@ -7,8 +7,8 @@ var router = require('./routers.js');
 var http = require('http'); //init app
 
 
-var app = express();
-var httpServer = http.createServer(app);
+var app = express(); // const httpServer = http.createServer(app); 
+
 var port = process.env.PORT || 3000; //set up views --> 
 
 app.set('view engine', 'pug'); //serve static assets --> 
@@ -23,6 +23,9 @@ app.get('/signup', function (req, res) {
 app.use('/form', router);
 app.use('/user', router); //start server -> 
 
-httpServer.listen(port, function () {
+var server = app.listen(port, function () {
   console.log("server is up on port number ".concat(port)); //server started! 
+});
+server.on('clientError', function (err, socket) {
+  console.log(err);
 });
