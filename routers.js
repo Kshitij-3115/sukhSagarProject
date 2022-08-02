@@ -54,7 +54,7 @@ router.post('/sendOTP', async (req, res) => {
     // res.send({isSent : true, otp : otp}); 
     const mobile = req.body.mobile; //mobile number
      
-    const {wallet} = await fast2sms.getWalletBalance('DqsK9hwhC6MH0LQjYM96m8TgVGqyLhEMRJQJnSV5CtRrw3aDGuF4pyjPOzYH');
+    const {wallet} = await fastTwoSms.getWalletBalance('DqsK9hwhC6MH0LQjYM96m8TgVGqyLhEMRJQJnSV5CtRrw3aDGuF4pyjPOzYH');
     console.log(wallet); 
     const options = { authorization: "DqsK9hwhC6MH0LQjYM96m8TgVGqyLhEMRJQJnSV5CtRrw3aDGuF4pyjPOzYH", message: otp, numbers: [mobile] };
     fastTwoSms.sendMessage(options).then((response) => {
