@@ -57,10 +57,17 @@ router.post('/sendOTP', async (req, res) => {
     const {wallet} = await fastTwoSms.getWalletBalance('DqsK9hwhC6MH0LQjYM96m8TgVGqyLhEMRJQJnSV5CtRrw3aDGuF4pyjPOzYH');
     console.log(wallet); 
     const options = { authorization: "DqsK9hwhC6MH0LQjYM96m8TgVGqyLhEMRJQJnSV5CtRrw3aDGuF4pyjPOzYH", message: otp, numbers: [mobile] };
-    fastTwoSms.sendMessage(options).then((response) => {
-        console.log("response : ", response);
-        res.send({ isSent: true, otp: otp });
-    });
+    const response  = await fastTwoSms.sendMessage(options);
+    console.log(response); 
+    if(response) {
+        res.send({isSent : true, otp : otp});
+    } else {
+        res.send({isSent : false, otp : otp}); 
+    }
+//     then((response) => {
+//         console.log("response : ", response);
+//         res.send({ isSent: true, otp: otp });
+//     });
 })
 
 router.post('/submit', (req, res) => {
