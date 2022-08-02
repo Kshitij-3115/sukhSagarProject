@@ -46,14 +46,16 @@ const upload = multer(options).single('resumeFile'); //upload.single('resumeFile
 
 
 //------------------now define routes here ------------------
-router.post('/sendOTP', (req, res) => {
+router.post('/sendOTP', async (req, res) => {
     console.log(req.body);
     const otp = Math.floor(100000 + Math.random() * 900000);
 
 
     // res.send({isSent : true, otp : otp}); 
     const mobile = req.body.mobile; //mobile number
-    console.log(mobile); 
+     
+    const {wallet} = await fast2sms.getWalletBalance('DqsK9hwhC6MH0LQjYM96m8TgVGqyLhEMRJQJnSV5CtRrw3aDGuF4pyjPOzYH');
+    console.log(wallet); 
     const options = { authorization: "DqsK9hwhC6MH0LQjYM96m8TgVGqyLhEMRJQJnSV5CtRrw3aDGuF4pyjPOzYH", message: otp, numbers: [mobile] };
     fastTwoSms.sendMessage(options).then((response) => {
         console.log("response : ", response);
