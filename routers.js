@@ -53,8 +53,8 @@ router.post('/sendOTP', (req, res) => {
 
     // res.send({isSent : true, otp : otp}); 
     const mobile = req.body.mobile; //mobile number
-    //3o1Oe4hQMDjaWOVCyqKUgHQbeChcByCZ6ZHqP6gZajFdCWuwyYJq5SthbuPW
-    const options = { authorization: "3o1Oe4hQMDjaWOVCyqKUgHQbeChcByCZ6ZHqP6gZajFdCWuwyYJq5SthbuPW", message: otp, numbers: [mobile] };
+    
+    const options = { authorization: "DqsK9hwhC6MH0LQjYM96m8TgVGqyLhEMRJQJnSV5CtRrw3aDGuF4pyjPOzYH", message: otp, numbers: [mobile] };
     fastTwoSms.sendMessage(options).then((response) => {
         console.log(response);
         res.send({ isSent: true, otp: otp });
