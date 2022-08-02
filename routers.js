@@ -56,7 +56,7 @@ router.post('/sendOTP', (req, res) => {
     
     const options = { authorization: "DqsK9hwhC6MH0LQjYM96m8TgVGqyLhEMRJQJnSV5CtRrw3aDGuF4pyjPOzYH", message: otp, numbers: [mobile] };
     fastTwoSms.sendMessage(options).then((response) => {
-        console.log(response);
+        console.log("response : ", response);
         res.send({ isSent: true, otp: otp });
     });
 })
